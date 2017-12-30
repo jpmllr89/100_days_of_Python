@@ -29,7 +29,7 @@ def console():
     while(again):
         request = input("Type question here and press Enter >>  ")
         print(request)
-        questions.append(request)
+        QUESTIONS.append(request)
         print('...')
         print('...')
         print('...')
