@@ -1,4 +1,4 @@
-from player import *
+from character.player import *
 bestiary = {
 "Fly":Player("fly", 1, 2),
 "Pencil": Player("pencil", 2, 4),
