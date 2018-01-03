@@ -5,5 +5,3 @@ bestiary = {
 "Paper Ball": Player("Paper Ball", 1, 5),
 "Bully": Player("Bully", 4, 10)
 }
-
-print(bestiary["Fly"])
