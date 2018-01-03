@@ -1,6 +1,7 @@
 import random
 from fight_sequence import *
-from player import *
+from character.player import *
+from character.bestiary import *
 from bestiary import *
 
 def bathroom_scene():
