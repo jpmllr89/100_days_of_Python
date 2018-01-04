@@ -1,13 +1,14 @@
 import random
 from bestiary import *
 
-def protag_turn(hero, villain):
+
+
+def protag_turn(hero, villain, ran):
     ask = input("What will you do? (attack/run)")
     turn = True
     while(turn):
         if ask == "run":
             turn = False
-            return run()
         elif ask == "attack":
             print("BOOM")
             villain.health -=1
@@ -32,11 +33,11 @@ def check_evasion(player):
     if chance > .8:
         return True
 
-def run():
-    chance = random.random()
-    if chance > 0.5:
-        print("You ran away!")
-        return True
+# def run():
+#     chance = random.random()
+#     if chance > 0.5:
+#         print("You ran away!")
+#         return True
 
 
 # checks to see if any party is dead.
@@ -53,8 +54,6 @@ def fight_seq(hero, villain):
     print(villain.name + " approaches!")
     while(going_on):
         if check_death(hero, villain) == True:
-            break
-        if run()==True:
             break
         protag_turn(hero, villain)
         antag_turn(hero, villain)
