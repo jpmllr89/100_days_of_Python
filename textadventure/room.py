@@ -1,7 +1,7 @@
 import random
 from fight_sequence import *
-from character.player import *
-from character.bestiary import *
+from player import *
+from bestiary import *
 from locations import *
 def game():
     print(""" You're walking down the school hall, second period is over and you
