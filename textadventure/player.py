@@ -1,9 +1,25 @@
+
+
 class Player:
-    def __init__(self, name, strength, health):
-        self.inventory = []
+    def __init__(self, name, health):
         self.name = name
-        self.strength = strength
         self.health = health
+
+    def attack(self, opponent):
+        attack = 1
+        opponent.health -= 1
+
+    def evade(self):
+        randInt = random.random()
+        if randInt>.4:
+            return False
+
+# Hero extends the Player super class
+class Hero(Player):
+    def __init__(self, name, health, strength):
+        super().__init__(name, health)
+        self.inventory = []
+        self.strength = strength
 
     def add_to_inventory(self, obj):
         self.inventory.append(obj)
@@ -20,6 +36,8 @@ class Player:
         self.inventory.remove(obj)
         print(self.name+" gave " + obj + " to " + person.name)
 
-    def attack(self):
-        attack = random.randint(0,2) * self.strength
-        print(attack)
+# Villain extends the Player superclass
+class Villain(Player):
+    def __init__(self, name, health, gold):
+        super().__init__(name, health)
+        self.gold = gold
