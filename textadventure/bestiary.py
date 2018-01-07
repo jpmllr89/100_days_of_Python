@@ -1,6 +1,8 @@
 from player import *
+
 bestiary = {
-"Fly": Villain("fly", 1, 2),
+               #name  #hp  #gold
+"Fly": Villain("fly", 2, 2),
 "Pencil": Villain("pencil", 2, 4),
 "Paper Ball": Villain("Paper Ball", 1, 5),
 "Bully": Villain("Bully", 4, 10),
@@ -9,5 +11,3 @@ bestiary = {
 "Basket Ball": Villain("Basket Ball", 3, 5),
 "Lunch Tray": Villain("Lunch Tray", 4, 4)
 }
-
-print(bestiary["Fly"].gold)

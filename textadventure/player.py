@@ -1,5 +1,3 @@
-
-
 class Player:
     def __init__(self, name, health):
         self.name = name
@@ -11,17 +9,19 @@ class Player:
 
     def evade(self):
         randInt = random.random()
-        if randInt>.4:
+        if randInt >.4:
             return False
 
 # Hero extends the Player super class
 class Hero(Player):
-    def __init__(self, name, health, strength):
+    def __init__(self, name, health, strength, gold):
         super().__init__(name, health)
         self.inventory = []
         self.strength = strength
+        self.gold = 0
 
     def add_to_inventory(self, obj):
+        print("You have taken the "+ obj)
         self.inventory.append(obj)
 
     def list_inventory(self):
