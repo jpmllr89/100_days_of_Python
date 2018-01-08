@@ -52,7 +52,6 @@ def fight_seq(hero, villain):
     going_on = True
     print(villain.name + " approaches!")
     while(going_on):
-
         protag_turn(hero, villain)
         if check_death(villain) ==True:
             print("You Won!")
