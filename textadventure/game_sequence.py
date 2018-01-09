@@ -9,4 +9,4 @@ def game_sequence(hero):
     main_place(hero)
 
 
-game_sequence(hero)
+# game_sequence(hero)

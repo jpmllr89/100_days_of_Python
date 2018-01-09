@@ -1,10 +1,11 @@
 from game_sequence import *
-
+import csv
 
 save_states = {
 }
 
 hero = Hero("Jesse", 25, 25, 25)
+hero1= Hero("peter", 23,23,23)
 def delete():
     for key in save_states:
         print(save_states[key].name)
@@ -14,21 +15,20 @@ def delete():
         if key == deletion:
             del save_states[key]
 
-def record_to_text(save_states):
-    text='{ '
-    path = "save.txt"
-    saves = open(path, 'w')
-    for key, value in save_states.items():
-        text = text + str(key) + ':' + str(value) +', '
-    text += '}'
-    saves.write(text)
-    saves.close()
+def record_to_text(save_states, path):
+    with open(path, 'w') as csvfile:
+        write = csv.writer(csvfile)
+        for key, value in save_states.items():
+            write.writerow([key, value])
 
-def parse_text(save_states):
-    path = "save.txt"
-    saves= open(path, 'r')
-    txt = saves.read()
-    print(txt)
+def parse_text(save_states, path):
+    with open(path, 'r') as csvfile:
+        readcsv = csv.reader(csvfile, delimiter = ',')
+        for row in readcsv:
+            make_data = []
+
+            save_states.update({ row[0] : row[1]})
+
 
 
 def save(hero):
@@ -36,9 +36,15 @@ def save(hero):
         save_states.update({hero.name:[hero.name, hero.health, hero.strength, hero.gold]})
     else:
         print("You must delete another Entry")
-# save(hero)
-#
-# record_to_text(save_states)
+save(hero)
+# print(save_states)
+save(hero1)
+# print(save_states)
+
+record_to_text(save_states, 'save.csv')
+parse_text(save_states, 'save.csv')
+
+print(save_states)
 # parse_text(save_states)
 
 #
