@@ -29,7 +29,6 @@ class Hero(Player):
         print()
         for i in self.inventory:
             print(i)
-            print()
 
     def give_item(self, person, obj):
         person.inventory.append(obj)

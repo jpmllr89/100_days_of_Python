@@ -7,6 +7,29 @@ def init_fight(hero):
     if fight < .3:
         enemy = bestiary[str(random.choice(list(bestiary.items()))[0])]
         fight_seq(hero, enemy)
+# def character_gen():
+
+
+def intro(hero):
+    print("""School sucks, but being a senior gives you some privileges above all
+    of the other classes.  Plus, having a part time job has allowed you to pull out a
+    small loan for a decent car.""")
+    time.sleep(1)
+    print("""Also, it's April and you've decided to skip the first two periods.
+    Luckily today the school's administration is a bit relaxed today, which is
+    a bit weird, but you quickly over look that fact anyways.""")
+    time.sleep(1)
+    print("""As you pass through the administrative offices, you overhear that the
+    principal is gone, but don't hear the reason, and that someone is waiting in
+    detention because of a drug accusation.""")
+    time.sleep(1)
+    print("""You realize that they're refering to one of your best friends, and you
+    know for a fact that he doesn't do any drugs, so there has to be a way to find out
+    what the accusations are, and if they're ungrounded, destroy the paperwork to save
+    your friends reputation.""")
+    time.sleep(1)
+    print("""You make a left to enter the main hall around the corner...""")
+    time.sleep(1)
 
 def main_place(hero):
     go_to = input("Where to? (bathroom/cafeteria/office/lockeroom)")
