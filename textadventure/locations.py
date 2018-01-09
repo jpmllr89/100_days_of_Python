@@ -37,7 +37,9 @@ def main_place(hero):
         bathroom_scene(hero)
     if go_to == "cafeteria":
         cafeteria(hero)
-
+def office(hero):
+    time.sleep(1)
+    print("""""")
 def cafeteria(hero):
     time.sleep(1)
     print("""Coming from around the corner, you can smell the stench of processed

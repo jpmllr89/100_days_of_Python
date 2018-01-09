@@ -62,11 +62,3 @@ def fight_seq(hero, villain):
         if check_death(hero) == True:
             print("You died!")
             going_on = False
-
-
-# print(run())
-# print(run())
-# print(run())
-# print(run())
-# print(run())
-#need to work on sequence, not like a real rpg where there are turns.
