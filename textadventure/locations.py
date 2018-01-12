@@ -11,65 +11,44 @@ def init_fight(hero):
 
 
 def intro(hero):
-    print("""School sucks, but being a senior gives you some privileges above all
-    of the other classes.  Plus, having a part time job has allowed you to pull out a
-    small loan for a decent car.""")
+    print("""Welcome to the stereotypical watered-down zelda-esque adventure game with an RPG loop.  You just came out of the forest
+    and have no idea who you are.  As you scout the land, the plain is pretty vast and empty, nothing but a sea
+    of grass.""")
     time.sleep(1)
-    print("""Also, it's April and you've decided to skip the first two periods.
-    Luckily today the school's administration is a bit relaxed today, which is
-    a bit weird, but you quickly over look that fact anyways.""")
-    time.sleep(1)
-    print("""As you pass through the administrative offices, you overhear that the
-    principal is gone, but don't hear the reason, and that someone is waiting in
-    detention because of a drug accusation.""")
-    time.sleep(1)
-    print("""You realize that they're refering to one of your best friends, and you
-    know for a fact that he doesn't do any drugs, so there has to be a way to find out
-    what the accusations are, and if they're ungrounded, destroy the paperwork to save
-    your friends reputation.""")
-    time.sleep(1)
-    print("""You make a left to enter the main hall around the corner...""")
+    print("""To the left you see a welcoming village, to the right you see a mountain surrounded by billowing dark clouds.""")
     time.sleep(1)
 
-def main_place(hero):
-    go_to = input("Where to? (bathroom/cafeteria/office/lockeroom)")
-    if go_to == "bathroom":
-        bathroom_scene(hero)
-    if go_to == "cafeteria":
-        cafeteria(hero)
-def office(hero):
+def plains(hero):
+    print("You walk a little bit more out into this sea of grass....")
     time.sleep(1)
-    print("""""")
-def cafeteria(hero):
-    time.sleep(1)
-    print("""Coming from around the corner, you can smell the stench of processed
-    food as the lunch ladies begin to cook for the day.  It's still pretty early""")
-    time.sleep(1)
-    print("""The tables and floors are spotless, not a tray in sight, there probably
-    isn't much to see here.""")
-    time.sleep(1)
-    print("""However,""")
-    time.sleep(1)
-    print("""There is a distinct smell of cigarette smoke lingering from the cracked
-    door to the outside on the other side of the cafeteria.  Someone is probably
-    having a smoke break, but since you are bored, you decide to go outside.""")
-    in_area = True
-    while(in_area):
-        print("""The lunch ladies are taking a smoke break with some of the
-        'burnouts'.  There isn't much to talk about....""")
-        init_fight(hero)
-        # if password in hero.inventory:
-        #     decision = input("What do you know?")
-        #     if decision = hero.inventory: #the password
-        #         # Give hero this item.
-        #     else:
-        #         print("Scram kid!")
-        print("Don't tell anyone we're here!")
-        print("You leave them and go back to the main hall")
-        in_area = False
-    main_place(hero)
+    go_to = input("Where to? (village/mountain)")
+    if go_to == "village":
+        village(hero)
+    if go_to == "mountain":
+        mountain(hero)
 
-def bathroom_scene(hero):
+def village(hero):
+    time.sleep(1)
+    print("""You just entered through the town's gates.  Even though the village seemed pretty close,
+    it took longer than realized to make to the village.  Because of that, you're a bit tired.""")
+    time.sleep(1)
+    print("""At the town square, you see a pavilion that hosts scraps of advertisements.
+    Ever since the advent of this new thing called 'writing', a towncrier is no longer necessary.
+    """)
+    time.sleep(1)
+    print("""To the left of the pavilion, there is an inn.  Looks like a great place for gossip and to rest.""")
+    time.sleep(1)
+    print("""To the right, there is a small market place.  You can hear vendors obnoxiously repeating what they have.""")
+    if "letter" in hero.inventory:
+        goto = input("Where would you like to go? (market/inn/plains/mountains)")
+    else:
+        goto = input("Where would you like to go? (market/inn/plains)")
+        if goto =="market":
+            marketplace(hero)
+        if goto =="inn":
+            inn(hero)
+
+def marketplace(hero):
     time.sleep(1)
     print("""You've entered the bathroom.  Just a regular bathroom, but some of
     the 'bad kids' hangout here.  It smells like someone was smoking in here
@@ -115,3 +94,30 @@ def bathroom_scene(hero):
             in_area= False
 
     main_place(hero)
+
+def scale_mountain(hero):
+    print("""You have climbed almost to the top.  There is a flat area that leads to a cave,
+    but you hesitate because you've been climbing pretty much all day.""")
+    time.sleep(1)
+    print("""You know the dragon is probably inside the cave and you have to slay it eventually
+    but you're pretty tired.""")
+    time.sleep(1)
+    rest = input("""Did you remember to buy some potions to replenish your health? (y/n)""")
+    if rest =="y":
+        print("""Great, let's use them before the dragon attacks!""")
+    else:
+        print("""you fool!  The dragon sticks its head out, rips your intestines out because you were too tired.""")
+def mountain(hero):
+    print("""The trail increasingly becomes steeper and more winded by boulders.
+    Straight ahead, you can see the mountain ominously reaches up into the clouds.""")
+    time.sleep(1)
+    print("""As you turn from another boulder, the trail leads to a guard
+    protecting a gateway that leads into a canyon.  This is a totally original motif, ok?
+    """)
+    time.sleep(1)
+    print("""The guard asks you to state your business.""")
+    time.sleep(1)
+    business = input("Request to go inside? (y/n)")
+    if business=='y':
+        if 'letter' in hero.inventory:
+            scale_mountain(hero)
