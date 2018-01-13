@@ -1,5 +1,5 @@
 from tkinter import *
-
+import math
 
 class calculator():
 
@@ -25,35 +25,31 @@ class calculator():
                 numbers[i].grid(row=j, column = k)
                 i+=1
         Button(numpad, text=str(nums[9])).grid(row=4, column = 1, pady=5)
+        Button(numpad, text=".").grid(row=4, column = 2, pady=5)
     def printer(self):
         print("pressed!")
     def __init__(self, app):
         app.title('Calculator')
-        self.entry = Entry(app)
+        answer = Frame(app)
+        answer.pack(side=TOP)
+
+        self.entry = Entry(answer)
+        self.entry.grid(row=0, column = 0, columnspan=6)
         numpad = Frame(app)
         numpad.pack(side=LEFT)
-        # oppad = Frame(app)
-        # oppad.pack(side = RIGHT)
         self.startNumbers(numpad)
-        # self.startOperators(oppad)
+        # nothing sophisticated for the operators.
+        operatorpad = Frame(app)
+        operatorpad.pack(side=RIGHT)
+        Button(operatorpad, text = '+', command = self.printer).grid(row = 0, column = 0, pady=1, padx = 2)
+        Button(operatorpad, text = '-', command = self.printer).grid(row = 1, column = 0, pady=1, padx = 2)
+        Button(operatorpad, text = '/', command = self.printer).grid(row = 2, column = 0, pady=1, padx = 2)
+        Button(operatorpad, text = '*', command = self.printer).grid(row = 3, column = 0, pady=1, padx = 2)
+        Button(operatorpad, text = '^', command = self.printer).grid(row = 0, column = 1, pady=1, padx = 2)
+        Button(operatorpad, text = 'sqrt()', command = self.printer).grid(row = 1, column = 1, pady=1, padx = 2)
+        Button(operatorpad, text = 'C', command = self.printer).grid(row = 2, column = 1, pady=1, padx = 2)
+        Button(operatorpad, text = '=', command = self.printer).grid(row = 3, column = 1, pady=1, padx = 2)
 
-        # For now I will have to add the buttons individually, since this is a bit new to me.
-        # Button(numpad, text = '9', command = self.printer).grid(row = 0, column = 0, pady=5, padx = 5)
-        # Button(numpad, text = '8', command = self.printer).grid(row = 0, column = 1, pady=5, padx = 5)
-        # Button(numpad, text = '7', command = self.printer).grid(row = 0, column = 2, pady=5, padx = 5)
-        # Button(numpad, text = '6', command = self.printer).grid(row = 1, column = 0, pady=5, padx = 5)
-        # Button(numpad, text = '5', command = self.printer).grid(row = 1, column = 1, pady=5, padx = 5)
-        # Button(numpad, text = '4', command = self.printer).grid(row = 1, column = 2, pady=5, padx = 5)
-        # Button(numpad, text = '3', command = self.printer).grid(row = 2, column = 0, pady=5, padx = 5)
-        # Button(numpad, text = '2', command = self.printer).grid(row = 2, column = 1, pady=5, padx = 5)
-        # Button(numpad, text = '1', command = self.printer).grid(row = 2, column = 2, pady=5, padx = 5)
-        # Button(numpad, text = '0', command = self.printer).grid(row = 3, column = 1, pady=5, padx = 5)
-        # operatorpad = Frame(app)
-        # operatorpad.pack(side=RIGHT)
-        # Button(operatorpad, text = '+', command = self.printer).grid(row = 0, column = 0, pady=5, padx = 5)
-        # Button(operatorpad, text = '-', command = self.printer).grid(row = 1, column = 0, pady=5, padx = 5)
-        # Button(operatorpad, text = '/', command = self.printer).grid(row = 2, column = 0, pady=5, padx = 5)
-        # Button(operatorpad, text = '*', command = self.printer).grid(row = 3, column = 0, pady=5, padx = 5)
 
 
 
