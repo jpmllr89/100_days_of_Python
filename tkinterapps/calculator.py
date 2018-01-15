@@ -14,6 +14,15 @@ class calculator():
     #             operators.append(Button(operatorpad, text = str(ops[i])))
     #             operators[i].grid(row=j, column = k)
     #             i+=1
+
+    def clear(self):
+        box = self.entry.get()
+        self.entry.delete(-1)
+
+    def all_clear(self):
+        box = self.entry.get()
+        self.entry.delete(0,END)
+
     def evaluate(self):
         equation = self.entry.get()
         try:
@@ -24,11 +33,18 @@ class calculator():
             time.sleep(1)
             self.entry.delete(0,END)
         else:
-            self.memory.pop()
-            self.entry.delete(0,END)
-            self.entry.insert(END,answer)
-            self.memory.append(answer)
-            self.entry.delete(0)
+            print(answer)
+            if len(self.memory)>0:
+                self.memory.pop()
+                self.entry.delete(0,END)
+                self.entry.insert(END,answer)
+                self.memory.append(answer)
+                self.entry.delete(0)
+            else:
+                self.entry.delete(0,END)
+                self.entry.insert(END,answer)
+                self.memory.append(answer)
+                print(self.memory)
 
     def startNumbers(self, numpad):
         # nums = [9,8,7,6,5,4,3,2,1,0]
@@ -51,16 +67,24 @@ class calculator():
         Button(numpad, text=str(9), command = lambda:self.insert_to_entry(9)).grid(row=0, column = 2)
         Button(numpad, text=".", command = lambda:self.insert_to_entry('.')).grid(row=3, column = 2)
 
-    def clear_box(self):
-        self.entry.delete(0,END)
+    def start_operators(self, operatorpad):
+        Button(operatorpad, text = '+', command = lambda:self.insert_op_to_entry('+')).grid(row = 0, column = 0, pady=1, columnspan=1)
+        Button(operatorpad, text = '-', command = lambda:self.insert_op_to_entry('-')).grid(row = 1, column = 0, pady=1, columnspan=1)
+        Button(operatorpad, text = '/', command = lambda:self.insert_op_to_entry('/')).grid(row = 2, column = 0, pady=1, columnspan=1)
+        Button(operatorpad, text = '*', command = lambda:self.insert_op_to_entry('*')).grid(row = 0, column = 1, pady=1, columnspan=1)
+        Button(operatorpad, text = '^2', command = lambda:self.power()).grid(row = 1, column = 1, pady=1, columnspan=1)
+        Button(operatorpad, text = 'sqrt()', command = lambda:self.sqroot()).grid(row = 2, column = 1, pady=1, columnspan=1)
+        Button(operatorpad, text = 'AC', command = lambda:self.all_clear()).grid(row= 1, column = 2, columnspan=1)
+        Button(operatorpad, text = 'C', command= lambda:self.clear()).grid(row = 2, column = 2, pady=1, columnspan=1)
+        Button(operatorpad, text = '=', command = lambda:self.evaluate()).grid(row = 3, column = 0, columnspan=3)
 
-    def memory(self):
-        try:
-            self.entry.delete(0,End)
-            self.entry.insert(END, self.memory.pop())
-        except SyntaxError:
-            self.entry.delete(0,END)
-            self.entry.insert(END, "Nothing in memory!")
+    # def memory(self):
+    #     try:
+    #         self.entry.delete(0,End)
+    #         self.entry.insert(END, self.memory.pop())
+    #     except SyntaxError:
+    #         self.entry.delete(0,END)
+    #         self.entry.insert(END, "Nothing in memory!")
 
     def sqroot(self):
         num = self.entry.get()
@@ -74,37 +98,34 @@ class calculator():
         self.entry.delete(0, END)
         self.entry.insert(END, power)
 
+    def insert_op_to_entry(self, arg):
+        self.entry.insert(END,arg)
     def insert_to_entry(self, arg):
-        self.entry.insert(END, arg)
+        print(self.entry.get()[:-1])
+        if self.entry.get()[:-1] in ['+', '-', '/', '*']:
+            self.entry.insert(END,arg)
+        elif len(self.memory)>0:
+            self.memory.pop()
+            self.entry.delete(0,END)
+            self.entry.insert(END, arg)
+        else:
+            self.entry.insert(END,arg)
 
     def __init__(self, app):
         app.title('Calculator')
         answer = Frame(app)
         answer.pack(side=TOP)
         self.memory = []
+        # self.calc_memory = []
         self.entry = Entry(answer)
         self.entry.grid(row=0, column = 0, columnspan=6)
         # self.entry.focus_set()
         numpad = Frame(app)
         numpad.pack(side=LEFT)
-        #since i cannot find a way how to input numbers into the lambda function
-        # assignment properly, it's probably better to enter them below one by one.
-
         self.startNumbers(numpad)
-        # nothing sophisticated for the operators.
         operatorpad = Frame(app)
         operatorpad.pack(side=RIGHT)
-        Button(operatorpad, text = '+', command = lambda:self.insert_to_entry('+')).grid(row = 0, column = 0, pady=1, padx = 2)
-        Button(operatorpad, text = '-', command = lambda:self.insert_to_entry('-')).grid(row = 1, column = 0, pady=1, padx = 2)
-        Button(operatorpad, text = '/', command = lambda:self.insert_to_entry('/')).grid(row = 2, column = 0, pady=1, padx = 2)
-        Button(operatorpad, text = '*', command = lambda:self.insert_to_entry('*')).grid(row = 3, column = 0, pady=1, padx = 2)
-        Button(operatorpad, text = '^2', command = lambda:self.power()).grid(row = 0, column = 1, pady=1, padx = 2)
-        Button(operatorpad, text = 'sqrt()', command = lambda:self.sqroot()).grid(row = 1, column = 1, pady=1, padx = 2)
-        Button(operatorpad, text = 'M', command = lambda:self.sqroot()).grid(row = 1, column = 1, pady=1, padx = 2)
-        Button(operatorpad, text = 'AC',)
-        Button(operatorpad, text = 'C').grid(row = 2, column = 1, pady=1, padx = 2)
-        Button(operatorpad, text = '=', command = lambda:self.evaluate()).grid(row = 3, column = 1, pady=1, padx = 2)
-
+        self.start_operators(operatorpad)
 
 
 
