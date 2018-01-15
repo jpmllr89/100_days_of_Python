@@ -62,8 +62,49 @@ def marketplace(hero):
         for key, value in items.items():
             print(value.name + " --- "+ str(value.buy)+" gold")
         selection = input("Type Selection here >>  ")
+        hero.add_inventory(items[selection])
+        hero.pay(items[selection].buy)
+        again = input("""Anything else?""")
+        if again == "n":
+            return = input("Return to village? (y/n)")
+            if return == "y":
+                village(hero)
 
-    main_place(hero)
+
+def inn(hero):
+    time.sleep(1)
+    print("""You step into a raucous tavern.  There are people drinking and talking in various
+    places, some are sitting around the fire.""")
+    time.sleep(1)
+    print("""You don't really have much time, because you have to slay a dragon
+    on top of the mountain.  You might as well stay here for a spell anyways
+    since you don't know how to scale the mountain in the first place.""")
+    time.sleep(1)
+    print("""This place is teeming with gossip, so first thing first, go to the bartender
+    and get a drink.""")
+    atBar = True
+    while(atBar):
+        bar = input("The bartender asks you what you would like to do. (Sleep/Talk)")
+        if bar =="Sleep":
+            print("Have a good night!")
+            time.sleep(1)
+        elif "permit" in hero.inventory:
+            print("The bartender reminds you to come back alive because he shouldn't give his brother's permit to anyone.")
+        elif bar=="Talk":
+            print("""You ask how to get inside the mountain's cave.  The bartender
+            pauses, hesitates to disclose, but then spills all.""")
+            time.sleep(1)
+            print("""He explains that there is an imperial guard at the gate once you hike through
+            the end of the quarry.  He will not let anyone through that doesn't have a permit.  Since
+            your intentions are pure, however, he will give you his brother's permit, who also
+            happens to be an adventurer like yourself.""")
+            time.sleep(1)
+            hero.add_inventory("permit")
+            print("You received the permit from the bartender!")
+            time.sleep(1)
+            print("Now it's time to slaaaayy")
+            village(hero)
+
 
 def scale_mountain(hero):
     print("""You have climbed almost to the top.  There is a flat area that leads to a cave,
@@ -75,8 +116,12 @@ def scale_mountain(hero):
     rest = input("""Did you remember to buy some potions to replenish your health? (y/n)""")
     if rest =="y":
         print("""Great, let's use them before the dragon attacks!""")
+        if "potion" in hero.inventory:
+            hero.health += hero.inventory[hero.inventory.index("potion")].
     else:
         print("""you fool!  The dragon sticks its head out, rips your intestines out because you were too tired.""")
+
+
 def mountain(hero):
     print("""The trail increasingly becomes steeper and more winded by boulders.
     Straight ahead, you can see the mountain ominously reaches up into the clouds.""")

@@ -1,5 +1,4 @@
 
-
 class Player:
     def __init__(self, name, health):
         self.name = name
@@ -36,6 +35,10 @@ class Hero(Player):
         person.inventory.append(obj)
         self.inventory.remove(obj)
         print(self.name+" gave " + obj + " to " + person.name)
+
+    def pay(self, amount):
+        self.gold-=amount
+
 
 # Villain extends the Player superclass
 class Villain(Player):
