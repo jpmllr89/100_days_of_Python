@@ -1,4 +1,5 @@
 import random
+from item_dictionary import items
 from fight_sequence import *
 import time
 
@@ -50,10 +51,6 @@ def village(hero):
 
 def marketplace(hero):
     time.sleep(1)
-    print("""You've entered the bathroom.  Just a regular bathroom, but some of
-    the 'bad kids' hangout here.  It smells like someone was smoking in here
-    probably a couple of hours ago.""")
-    time.sleep(1)
     print("""People say it's not as busy as it usually is.  There are three stands
     open.  One in particular, that has an assortment of shiny swords and mysterious
     potions catches your eye.""")
@@ -62,7 +59,9 @@ def marketplace(hero):
     in_area = True
     while(in_area):
         print("""Welcome to my store.  What would you like to buy?""")
-
+        for key, value in items.items():
+            print(value.name + " --- "+ str(value.buy)+" gold")
+        selection = input("Type Selection here >>  ")
 
     main_place(hero)
 
