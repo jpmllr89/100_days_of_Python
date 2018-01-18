@@ -33,7 +33,7 @@ class Calculator():
         nums = [9,8,7,6,5,4,3,2,1,0]
         numbers = []
         for i in range(0,10):
-          numbers.append(Button(numpad, overrelief = SUNKEN, text=str(i), command = lambda num = i:self.insert_to_entry(num)))
+          numbers.append(Button(numpad, width = 3, overrelief = SUNKEN, text=str(i), command = lambda num = i:self.insert_to_entry(num)))
         numbers[0].grid(row=3, column = 1)
         numbers[1].grid(row=2, column = 0)
         numbers[2].grid(row=2, column = 1)
@@ -47,17 +47,27 @@ class Calculator():
         Button(numpad, text=".", command = lambda:self.insert_to_entry('.')).grid(row=3, column = 2)
 
     def start_operators(self, operatorpad):
-        ops = ['+', '-', '/', '*']
-        operators = []
-        Button(operatorpad, text = '+', command = lambda:self.insert_to_entry('+')).grid(row = 0, column = 0)
-        Button(operatorpad, text = '-', command = lambda:self.insert_to_entry('-')).grid(row = 1, column = 0)
-        Button(operatorpad, text = '/', command = lambda:self.insert_to_entry('/')).grid(row = 2, column = 0)
-        Button(operatorpad, text = '*', command = lambda:self.insert_to_entry('*')).grid(row = 0, column = 1)
-        Button(operatorpad, text = '^2', command = lambda:self.power()).grid(row = 1, column = 1)
-        Button(operatorpad, text = 'sqrt()', command = lambda:self.sqroot()).grid(row = 2, column = 1)
-        Button(operatorpad, text = 'AC', command = lambda:self.all_clear()).grid(row= 1, column = 2)
-        Button(operatorpad, text = 'C', command= lambda:self.clear()).grid(row = 2, column = 2,)
-        Button(operatorpad, text = '=', command = lambda:self.evaluate()).grid(row = 3, column = 0)
+        # commenting below two lines because for some reason, entering them like
+        # the numbers function above does not work.
+        # ops = ['+', '-', '/', '*']
+        # operators = []
+        Button(operatorpad, width=3, text = '+', command = lambda:self.insert_to_entry('+')).grid(row = 0, column = 0)
+        Button(operatorpad, width=3, text = '-', command = lambda:self.insert_to_entry('-')).grid(row = 1, column = 0)
+        Button(operatorpad, width=3, text = '/', command = lambda:self.insert_to_entry('/')).grid(row = 2, column = 0)
+        Button(operatorpad, width=3, text = '*', command = lambda:self.insert_to_entry('*')).grid(row = 0, column = 1)
+        Button(operatorpad, width=3, text = '^2', command = lambda:self.power()).grid(row = 1, column = 1)
+        Button(operatorpad, width=3, text = 'sqrt()', command = lambda:self.sqroot()).grid(row = 2, column = 1)
+        Button(operatorpad, width=3, text = '%', command = lambda:self.percent()).grid(row = 0, column = 2)
+        Button(operatorpad, width=3, text = 'AC', command = lambda:self.all_clear()).grid(row= 1, column = 2)
+        Button(operatorpad, width=3, text = 'C', command= lambda:self.clear()).grid(row = 2, column = 2,)
+        Button(operatorpad, width=3, text = '=', command = lambda:self.evaluate()).grid(row = 3, column = 0, columnspan = 3)
+
+
+    def percent(self):
+        num =self.entry.get()
+        percent = float(num)/100
+        self.entry.delete(0,END)
+        self.entry.insert(END,percent)
 
     def sqroot(self):
         num = self.entry.get()
@@ -76,7 +86,7 @@ class Calculator():
 
     def main():
         app=Tk()
-        app.geometry("300x300")
+        # app.geometry("300x300")
         calc = Calculator(app)
         app.mainloop()
 
@@ -87,7 +97,7 @@ class Calculator():
         answer.pack(side=TOP)
         # packs entry into top frame
         self.entry = Entry(answer)
-        self.entry.grid(row=0, column = 0, columnspan=6)
+        self.entry.pack(fill=X, expand = True)
         # creates the number pad
         numpad = Frame(app)
         numpad.pack(side=LEFT)
