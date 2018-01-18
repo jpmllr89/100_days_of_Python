@@ -1,7 +1,9 @@
 from tkinter import *
 import math
 import time
-class calculator():
+
+
+class Calculator():
 
     def clear(self):
         box = self.entry.get()
@@ -31,7 +33,7 @@ class calculator():
         nums = [9,8,7,6,5,4,3,2,1,0]
         numbers = []
         for i in range(0,10):
-          numbers.append(Button(numpad, text=str(i), command = lambda num = i:self.insert_to_entry(num)))
+          numbers.append(Button(numpad, overrelief = SUNKEN, text=str(i), command = lambda num = i:self.insert_to_entry(num)))
         numbers[0].grid(row=3, column = 1)
         numbers[1].grid(row=2, column = 0)
         numbers[2].grid(row=2, column = 1)
@@ -72,6 +74,12 @@ class calculator():
     def insert_to_entry(self, arg):
         self.entry.insert(END, arg)
 
+    def main():
+        app=Tk()
+        app.geometry("300x300")
+        calc = Calculator(app)
+        app.mainloop()
+
     def __init__(self, app):
         app.title('Calculator')
         # top frame to hold evaluation
@@ -88,14 +96,3 @@ class calculator():
         operatorpad = Frame(app)
         operatorpad.pack(side=RIGHT)
         self.start_operators(operatorpad)
-
-
-
-
-
-
-
-
-# app=Tk()
-# calc = calculator(app)
-# app.mainloop()

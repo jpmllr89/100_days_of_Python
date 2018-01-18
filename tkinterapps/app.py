@@ -2,8 +2,8 @@
 from calculator import *
 
 
-which_app = input("Which app? (calculator)>>")
-if which_app =="calculator":
-    app = Tk()
-    calc = calculator(app)
-    app.mainloop()
+calculator.main()
+
+# which_app = input("Which app? (calculator)>>")
+# if which_app =="calculator":
+#     calculator.main()
