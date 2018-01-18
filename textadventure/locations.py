@@ -1,4 +1,5 @@
 import random
+from player import *
 from item_dictionary import items
 from fight_sequence import *
 import time
@@ -10,6 +11,9 @@ def init_fight(hero):
         fight_seq(hero, enemy)
 # def character_gen():
 
+def fight_dragon(hero):
+    enemy = bestiary["Dragon"]
+    fight_seq(hero, enemy)
 
 def intro(hero):
     print("""Welcome to the stereotypical watered-down zelda-esque adventure game with an RPG loop.  You just came out of the forest
@@ -22,11 +26,20 @@ def intro(hero):
 def plains(hero):
     print("You walk a little bit more out into this sea of grass....")
     time.sleep(1)
-    go_to = input("Where to? (village/mountain)")
+    go_to = input("Where to? (village/mountain/venture)")
     if go_to == "village":
+        init_fight(hero)
         village(hero)
     if go_to == "mountain":
+        init_fight(hero)
         mountain(hero)
+    if go_to =="venture":
+        init_fight(hero)
+        plains(hero)
+    else:
+        init_fight(hero)
+        plains(hero)
+
 
 def village(hero):
     time.sleep(1)
@@ -62,14 +75,13 @@ def marketplace(hero):
         for key, value in items.items():
             print(value.name + " --- "+ str(value.buy)+" gold")
         selection = input("Type Selection here >>  ")
-        hero.add_inventory(items[selection])
-        hero.pay(items[selection].buy)
+        if hero.pay(items[selection].buy)==True:
+            hero.add_to_inventory(items[selection].name)
         again = input("""Anything else?""")
         if again == "n":
-            return = input("Return to village? (y/n)")
-            if return == "y":
+            go_back= input("Return to village? (y/n)")
+            if go_back == "y":
                 village(hero)
-
 
 def inn(hero):
     time.sleep(1)
@@ -88,6 +100,8 @@ def inn(hero):
         if bar =="Sleep":
             print("Have a good night!")
             time.sleep(1)
+            hero.health = 25
+            print("Your health is replenished!: "+ str(hero.health))
         elif "permit" in hero.inventory:
             print("The bartender reminds you to come back alive because he shouldn't give his brother's permit to anyone.")
         elif bar=="Talk":
@@ -99,7 +113,7 @@ def inn(hero):
             your intentions are pure, however, he will give you his brother's permit, who also
             happens to be an adventurer like yourself.""")
             time.sleep(1)
-            hero.add_inventory("permit")
+            hero.add_to_inventory("permit")
             print("You received the permit from the bartender!")
             time.sleep(1)
             print("Now it's time to slaaaayy")
@@ -117,12 +131,13 @@ def scale_mountain(hero):
     if rest =="y":
         print("""Great, let's use them before the dragon attacks!""")
         if "potion" in hero.inventory:
-            hero.health += hero.inventory[hero.inventory.index("potion")].
+            hero.health += hero.inventory[hero.inventory.index("potion")]
     else:
         print("""you fool!  The dragon sticks its head out, rips your intestines out because you were too tired.""")
 
 
 def mountain(hero):
+    hero.list_inventory()
     print("""The trail increasingly becomes steeper and more winded by boulders.
     Straight ahead, you can see the mountain ominously reaches up into the clouds.""")
     time.sleep(1)
@@ -134,5 +149,5 @@ def mountain(hero):
     time.sleep(1)
     business = input("Request to go inside? (y/n)")
     if business=='y':
-        if 'letter' in hero.inventory:
+        if 'permit' in hero.inventory:
             scale_mountain(hero)

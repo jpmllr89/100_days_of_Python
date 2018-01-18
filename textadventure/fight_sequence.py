@@ -4,14 +4,6 @@ import time
 import sys
 
 # ran_away = False
-# def run():
-#     chance = random.random()
-#     if chance < 0.5:
-#         print("False")
-#         return False
-#     else:
-#         print("True")
-#         return True
 
 # checks to see if protagonist evades attack
 # def check_evasion(player):
@@ -25,11 +17,11 @@ def check_death(player):
         return True
 
 def protag_turn(hero, villain):
-    ask = input("What will you do? (attack/inventory)")
+    ask = input("What will you do? (attack)")
     if ask == "attack":
         print("BOOM")
-        villain.health -=1
-
+        damage = hero.strength
+        villain.health -= damage
     else:
         print("You've got to do something!")
         protag_turn(hero, villain)

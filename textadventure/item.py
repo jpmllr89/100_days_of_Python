@@ -16,6 +16,7 @@ class Medicine(Item):
 
     def take(hero):
         hero.health += self.health
+        hero.inventory.remove(self.name)
 
 
 class Weapon(Item):
@@ -26,3 +27,4 @@ class Weapon(Item):
     def equip(hero):
         hero.body["right_hand"] = self.name
         hero.strength +=damage
+        hero.inventory.remove(self.name)

@@ -1,4 +1,3 @@
-
 class Player:
     def __init__(self, name, health):
         self.name = name
@@ -17,6 +16,7 @@ class Player:
 class Hero(Player):
     def __init__(self, name, health, strength, gold):
         super().__init__(name, health)
+        # this is an equipment dictionary.
         self.inventory = []
         self.strength = strength
         self.gold = 0
@@ -26,6 +26,8 @@ class Hero(Player):
         self.inventory.append(obj)
 
     def list_inventory(self):
+        if len(self.inventory) ==0:
+            print("there is nothing in here")
         print("Here is the inventory in " + self.name +"'s"+" inventory:")
         print()
         for i in self.inventory:
@@ -37,8 +39,12 @@ class Hero(Player):
         print(self.name+" gave " + obj + " to " + person.name)
 
     def pay(self, amount):
-        self.gold-=amount
-
+        if self.gold-amount <=0:
+            print("You cannot afford this!")
+        else:
+            self.gold-=amount
+            print("You have "+str(self.gold)+" left.")
+            return True
 
 # Villain extends the Player superclass
 class Villain(Player):
